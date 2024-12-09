@@ -1,0 +1,11 @@
+Demandes ->
+
+- Modifier informations de contact (type photo)
+- Utilisateurs peuvent modifier profil
+- Comptables peuvent modifier les fiches visiteurs
+- rajout de champ spécifique (comme petit dej, diner,...) -> tout changer pour que ça marche
+- certains utilisateurs peuvent rajouter des commentaires sur les fiches de frais
+- rajouter des petites stats type X s'est connecté Y fois, le nbr de fiches remplis...
+- Donner au comptable ou visiteur  la possibilité de supprimer ou changer des roles
+- Ajouter un historique de modification (voir la date de telle modification)
+- Rajouter dans la connexion un champ supplémentaire

@@ -1,0 +1,25 @@
+Trucs à faire :
+
+- Faire les changements nécessaire sur les parties visiteur/comptable
+- Faire 2 tableau -> Un avec des frais forfait et un autre pour les frais hors forfaits (Et des barres de recherche pour trouver selon le mois)
+
+Trucs mineurs :
+
+- Faire en sorte de faire un système de page / limitation pour le tableau des users
+- Empêcher l'utilisation de la même adresse mail parce que sinon le compte pourra pas se co
+- Faire en sorte qu'un utilisateur avec le statut inactif ne puisse plus accéder à quoique ce soit (ça le bloque)
+- Faire en sorte qu'un utilisateur n'ayant pas le bon id_role ne puisse pas accéder à certaines parties du site
+- Faire le petit message succès de partout (celui dans gererForfaits.php)
+
+Trucs finis :D :
+
+- Faire en sorte que la création de profil prenne en compte le role
+- Rajouter Téléphone et Mot de passe dans la création et modification de profil côté Admin
+- Changer certain input en selecteur pour éviter les problèmes
+- Faire un système de hachage
+- Rajouter page modification de profil côté Visiteur/comptable SANS le changement de rôle et de mot de passe 
+- Mettre un petit texte dans les dashboard type "bonjour X, <br> vous êtes connecté en tant que Y"
+- Rajouter une partie Frais horsforfaits (avec le montant, le libellé et le justificatif)
+- Créer les tables horsforfait et frais_forfait
+- Rajouter le nombre de repas / nuits et la possibilité d'upload des justificatifs
+- Mettre un forfait kilométrique
