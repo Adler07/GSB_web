@@ -1,3 +1,20 @@
+<?php
+session_start();
+$user = $_SESSION['id_role'];
+if (isset($user)){
+    if ($user == 3) {
+        header("Location: dashboardVisiteur.php");
+        exit;
+    } else if ($user == 2) {
+        header("Location: dashboardComptable.php");
+        exit;
+    } else if ($user == 1) {
+        header("Location: dashboardAdmin.php");
+        exit;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>

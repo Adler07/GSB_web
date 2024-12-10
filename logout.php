@@ -4,6 +4,6 @@
     session_unset(); 
     session_destroy(); 
 
-    header("location: connexion.html");
+    header("location: index.php");
     exit;
     ?>
