@@ -1,5 +1,18 @@
 <?php 
 session_start(); 
+$user_role = $_SESSION['id_role'];
+if (isset($user_role)){
+    if ($user_role == 3) {
+        header("Location: dashboardVisiteur.php");
+        exit;
+    } else if ($user_role == 2) {
+        header("Location: dashboardComptable.php");
+        exit;
+    } else if ($user_role == 1) {
+        header("Location: dashboardAdmin.php");
+        exit;
+    }
+}
 
 $host = 'collaiw225.mysql.db';
 $dbname = 'collaiw225';

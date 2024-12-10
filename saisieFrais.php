@@ -1,7 +1,13 @@
 <?php 
 session_start();
 $id_visiteur = $_SESSION['id'];
-
+$user = $_SESSION['id_role'];
+    if ($user == 1) {
+        header("Location: dashboardAdmin.php");
+        exit;
+    } else if ($user == 2) {
+        header("Location: dashboardComptable.php");
+        exit;}
 
 $db = 'mysql:host=collaiw225.mysql.db;dbname=collaiw225;charset=utf8';
 $username = 'collaiw225';

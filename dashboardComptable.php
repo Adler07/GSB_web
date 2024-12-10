@@ -1,5 +1,12 @@
 <?php
 session_start();
+$user = $_SESSION['id_role'];
+    if ($user == 3) {
+        header("Location: dashboardVisiteur.php");
+        exit;
+    } else if ($user == 1) {
+        header("Location: dashboardAdmin.php");
+        exit;}
 
 $prenom = $_SESSION['prenom'];
 $nom = $_SESSION['nom'];
