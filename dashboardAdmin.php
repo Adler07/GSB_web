@@ -6,7 +6,8 @@ $user = $_SESSION['id_role'];
         exit;
     } else if ($user == 2) {
         header("Location: dashboardComptable.php");
-        exit;}
+        exit;
+    } 
 
 
 

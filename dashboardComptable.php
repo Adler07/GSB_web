@@ -7,6 +7,7 @@ $user = $_SESSION['id_role'];
     } else if ($user == 1) {
         header("Location: dashboardAdmin.php");
         exit;}
+        
 
 $prenom = $_SESSION['prenom'];
 $nom = $_SESSION['nom'];

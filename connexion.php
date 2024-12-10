@@ -1,6 +1,8 @@
 <?php 
 session_start(); 
+$user_status = $_SESSION['statut'];
 $user_role = $_SESSION['id_role'];
+
 if (isset($user_role)){
     if ($user_role == 3) {
         header("Location: dashboardVisiteur.php");
@@ -11,7 +13,11 @@ if (isset($user_role)){
     } else if ($user_role == 1) {
         header("Location: dashboardAdmin.php");
         exit;
-    }
+    } 
+}
+
+if ($user_status == "Inactif"){
+    header("Location: index.php");
 }
 
 $host = 'collaiw225.mysql.db';
@@ -31,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["mdp"];
 
     $stmt = $pdo->prepare("
-        SELECT u.id, u.email, u.pass, u.prenom, u.nom, r.id_role, r.nom_role 
+        SELECT u.id, u.email, u.pass, u.prenom, u.nom, u.statut, r.id_role, r.nom_role 
         FROM utilisateur u
         INNER JOIN role r ON u.id_role = r.id_role
         WHERE u.email = :email
@@ -46,6 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["id_role"] = $user["id_role"]; 
             $_SESSION["nom_role"] = $user["nom_role"]; 
             $_SESSION['id'] = $user['id'];
+            $_SESSION['statut'] = $user['statut'];
 
             if ($user["id_role"] == 3) {
                 header("Location: dashboardVisiteur.php");
@@ -59,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         } else {
             echo "Email ou mot de passe incorrect";
-            header("Refresh: 2; URL=connexion.html");
+            header("Refresh: 2; URL=index.php");
             exit;
         }
     }
