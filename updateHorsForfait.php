@@ -22,34 +22,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $justificatif = $_FILES['justificatif'];
  
     
-    if (empty($fiche_id) || empty($date_hors_farfait) || empty($libelle) || empty($montant) || empty($justificatif)) {
-        die("Tous les champs sont obligatoires.");
+    $justificatif = null;
+    if (isset($_FILES['justificatif']) && $_FILES['justificatif']['error'] === UPLOAD_ERR_OK) {
+        $targetDirectory = 'assets/uploads/'; 
+        $fileName = basename($_FILES['justificatif']['name']); 
+        $targetFilePath = $targetDirectory . $fileName;
+
+        if (move_uploaded_file($_FILES['justificatif']['tmp_name'], $targetFilePath)) {
+            $justificatif = $targetFilePath;
+        } else {
+            die("Erreur lors de l'upload du fichier justificatif.");
+        }
     }
 
     try {
-      
-        $stmt = $pdo->prepare("
+        $sql = "
             UPDATE hors_forfait 
             SET date_hors_forfait = :date_hors_forfait,
                 libelle = :libelle, 
-                montant = :montant, 
-                justificatif = :justificatif
-                WHERE `id_hors_forfait` = :fiche_id
-        ");
-
-
-        $stmt->execute([
+                montant = :montant
+        ";
+        $params = [
             'fiche_id' => $fiche_id,
             'date_hors_forfait' => $date_hors_farfait,
             'libelle' => $libelle,
             'montant' => $montant,
-            'justificatif' => $justificatif
-            
-        ]);
+        ];
+
+        // Ajouter la colonne justificatif si un fichier a été uploadé
+        if ($justificatif !== null) {
+            $sql .= ", justificatif = :justificatif";
+            $params['justificatif'] = $justificatif;
+        }
+
+        $sql .= " WHERE `id_hors_forfait` = :fiche_id";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
 
         header("Location: dashboardVisiteur.php");
         exit;
-
     } catch (PDOException $e) {
         die("Erreur lors de la mise à jour : " . $e->getMessage());
     }

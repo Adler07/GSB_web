@@ -65,10 +65,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         $sql .= " WHERE `n°fiche_frais` = :fiche_id";
 
-        // Préparer la requête
+        
         $stmt = $pdo->prepare($sql);
 
-        // Exécuter la requête
+
         $params = [
             ':montant_repas' => $montant_repas,
             ':nombre_repas' => $nombre_repas,
@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         header("Location: dashboardVisiteur.php");
         exit;
-        
+
     } catch (PDOException $e) {
         die("Erreur lors de la mise à jour : " . $e->getMessage());
     }
