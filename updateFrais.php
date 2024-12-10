@@ -31,9 +31,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Tous les champs sont obligatoires.");
     }
 
+    $justificatif = null;
+    if (isset($_FILES['justificatif']) && $_FILES['justificatif']['error'] === UPLOAD_ERR_OK) {
+        $targetDirectory = 'assets/uploads/'; // Assurez-vous que ce dossier existe et est accessible en écriture
+        $fileName = basename($_FILES['justificatif']['name']);
+        $targetFilePath = $targetDirectory . $fileName;
+
+        if (move_uploaded_file($_FILES['justificatif']['tmp_name'], $targetFilePath)) {
+            $justificatif = $targetFilePath;
+        } else {
+            die("Erreur lors de l'upload du fichier justificatif.");
+        }
+    }
+
     try {
-      
-        $stmt = $pdo->prepare("
+        // Construire la requête SQL
+        $sql = "
             UPDATE fiche_frais 
             SET montant_repas = :montant_repas, 
                 nombre_repas = :nombre_repas, 
@@ -43,34 +56,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 nombre_deplacement = :nombre_deplacement, 
                 total = :total, 
                 date_soumission = :date_soumission,
-                justificatif = :justificatif,
-                kilometres_voiture = :kilometres_voiture
-            WHERE `n°fiche_frais` = :fiche_id
-        ");
+                kilometres_voiture = :kilometres_voiture";
+        
+        // Ajouter le justificatif uniquement si un nouveau fichier a été uploadé
+        if ($justificatif !== null) {
+            $sql .= ", justificatif = :justificatif";
+        }
+        
+        $sql .= " WHERE `n°fiche_frais` = :fiche_id";
 
+        // Préparer la requête
+        $stmt = $pdo->prepare($sql);
 
-        $stmt->execute([
-            'fiche_id' => $fiche_id,
-            'montant_repas' => $montant_repas,
-            'nombre_repas' => $nombre_repas,
-            'montant_hebergement' => $montant_hebergement,
-            'nombre_hebergement' => $nombre_hebergement,
-            'montant_deplacement' => $montant_deplacement,
-            'nombre_deplacement' => $nombre_deplacement,
-            'total' => $total,
-            'date_soumission' => $date_soumission,
-            'kilometres_voiture' => $kilometres_voiture,
-            'justificatif' => $justificatif
-            
-        ]);
+        // Exécuter la requête
+        $params = [
+            ':montant_repas' => $montant_repas,
+            ':nombre_repas' => $nombre_repas,
+            ':montant_hebergement' => $montant_hebergement,
+            ':nombre_hebergement' => $nombre_hebergement,
+            ':montant_deplacement' => $montant_deplacement,
+            ':nombre_deplacement' => $nombre_deplacement,
+            ':total' => $total,
+            ':date_soumission' => $date_soumission,
+            ':kilometres_voiture' => $kilometres_voiture,
+            ':fiche_id' => $fiche_id
+        ];
+
+        // Ajouter le justificatif dans les paramètres si nécessaire
+        if ($justificatif !== null) {
+            $params[':justificatif'] = $justificatif;
+        }
+
+        $stmt->execute($params);
 
         header("Location: dashboardVisiteur.php");
         exit;
-
+        
     } catch (PDOException $e) {
         die("Erreur lors de la mise à jour : " . $e->getMessage());
     }
-} else {
-    die("Requête invalide.");
 }
-?>
