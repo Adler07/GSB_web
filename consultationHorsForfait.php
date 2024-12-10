@@ -92,6 +92,12 @@ $isEditable = ($fiche['statut'] === 'En attente');
             <label for="montant" class="form-label">Montant (€) :</label>
             <input type="number" class="form-control" id="montant" name="montant" step="0.01" value="<?php echo htmlspecialchars($fiche['montant']); ?>" required>
         </div>
+        <?php if (!empty($fiche['justificatif'])): ?>
+    <div class="mb-3">
+        <label class="form-label">Justificatif existant :</label>
+        <a href="<?php echo $fiche['justificatif']; ?>" target="_blank">Voir le justificatif précédent</a>
+    </div>
+<?php endif; ?>
                 <div class="mb-3">
                      <label for="justificatif" class="form-label">Justificatif :</label>
                             <input type="file" class="form-control" id="justificatif" name="justificatif">
