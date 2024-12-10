@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-$db = 'mysql:host=localhost;dbname=gsb1;charset=utf8';
-$username = 'root';
-$password = '';
+$db = 'mysql:host=collaiw225.mysql.db;dbname=collaiw225;charset=utf8';
+$username = 'collaiw225';
+$password = '1234Azer';
 $options = [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,

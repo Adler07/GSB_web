@@ -6,10 +6,10 @@ $nom = $_SESSION['nom'];
 $role = $_SESSION['nom_role'];
 $id = $_SESSION['id'];
 
-$host = 'localhost';
-$dbname = 'gsb1';
-$username = 'root';
-$password = '';
+$host = 'collaiw225.mysql.db';
+$dbname = 'collaiw225';
+$username = 'collaiw225';
+$password = '1234Azer';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
