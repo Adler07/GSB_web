@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $justificatif_path = null; 
         if ($justificatif['error'] === UPLOAD_ERR_OK) {
-            $target_dir = "assets\uploads"; 
+            $target_dir = "assets/uploads/"; 
             $justificatif_path = $target_dir . basename($justificatif['name']);
             
             if (!move_uploaded_file($_FILES['justificatif']['tmp_name'], $justificatif_path)) {
@@ -54,7 +54,7 @@ $stmt->execute([$montant_repas, $nombre_repas, $montant_hebergement, $nombre_heb
     
         $justificatif_path = null; 
         if ($justificatif['error'] === UPLOAD_ERR_OK) {
-            $target_dir = "assets\uploads"; 
+            $target_dir = "assets/uploads/"; 
             
             if (!is_dir($target_dir)) {
                 mkdir($target_dir, 0777, true);

@@ -91,7 +91,7 @@ if (!$fiche) {
         <?php if (!empty($fiche['justificatif'])): ?>
             <div class="mb-3">
                 <label class="form-label">Justificatif existant :</label>
-                <a href="path_to_your_directory/<?php echo $fiche['justificatif']; ?>" target="_blank">Voir le justificatif précédent</a>
+                <a href="assets/uploads/<?php echo $fiche['justificatif']; ?>" target="_blank">Voir le justificatif</a>
             </div>
         <?php endif; ?>
         <div class="mb-3">
