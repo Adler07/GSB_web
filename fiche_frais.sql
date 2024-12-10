@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2024 at 02:24 PM
+-- Generation Time: Dec 10, 2024 at 03:17 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -63,11 +63,13 @@ INSERT INTO `fiche_frais` (`n°fiche_frais`, `montant_repas`, `nombre_repas`, `m
 (15, 120.00, 3, 250.00, 5, 0.00, 0, 0.00, '2024-11-05', 'assets/uploads/SQL_Fr_PPT01_etudiant_corrigé.pdf', 45, '', 0.00, NULL),
 (16, 120.00, 3, 250.00, 5, 0.00, 0, 0.00, '2024-11-05', 'assets/uploads/SQL_Fr_PPT01_etudiant_corrigé.pdf', 45, '', 0.00, NULL),
 (17, 120.00, 3, 250.00, 5, 0.00, 0, 0.00, '2024-11-05', 'assets/uploads/SQL_Fr_PPT01_etudiant_corrigé.pdf', 45, '', 0.00, NULL),
-(18, 400.00, 12, 400.00, 8, 0.00, 0, 0.00, '2024-11-02', 'assets\\uploadsTrame Générique du Dossier pour les applications GSB.pdf', 120, 'En attente', NULL, 2),
+(18, 400.00, 12, 420.00, 8, 0.00, 0, 880.00, '2024-11-02', 'Array', 120, 'Remboursement partiel', 600.00, 2),
 (19, 85.00, 4, 225.00, 2, NULL, 0, 435.00, '2024-09-04', 'assets\\uploadscorrige_sujet_polynesie-CEJM.pdf', 250, 'Refusé', 0.00, 2),
 (20, 60.00, 6, 300.00, 3, 0.00, 0, 460.00, '2024-11-01', 'assets\\uploadscorrige_sujet_polynesie-CEJM.pdf\r\n', 200, 'Remboursement partiel', 300.00, 2),
 (21, 220.00, 2, 52.00, 4, 0.00, 0, 274.50, '2024-10-10', 'assets/uploads/SQL_Fr_PPT01_etudiant_corrigé.pdf\r\n', 5, 'Remboursement complet', 274.50, 2),
-(22, 100.00, 2, 250.00, 3, NULL, 1, 370.00, '2024-05-16', 'assets\\uploadsExemple-Annexes-9-1-B-Fiche-descriptive.pdf', 24, 'Remboursement complet', 370.00, NULL);
+(22, 100.00, 2, 250.00, 3, NULL, 1, 370.00, '2024-05-16', 'assets\\uploadsExemple-Annexes-9-1-B-Fiche-descriptive.pdf', 24, 'Remboursement complet', 370.00, NULL),
+(23, 100.00, 5, 120.00, 3, NULL, 0, 230.00, '2024-04-04', 'assets\\uploadsLettre de motivation ADW Network.pdf', 20, 'En attente', 0.00, NULL),
+(24, 400.00, 12, 800.00, 6, NULL, 0, 1270.00, '2024-12-01', 'assets\\uploadsLettre de motivation BCI.pdf', 140, 'En attente', 0.00, 14);
 
 --
 -- Indexes for dumped tables
@@ -87,7 +89,17 @@ ALTER TABLE `fiche_frais`
 -- AUTO_INCREMENT for table `fiche_frais`
 --
 ALTER TABLE `fiche_frais`
-  MODIFY `n°fiche_frais` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `n°fiche_frais` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `fiche_frais`
+--
+ALTER TABLE `fiche_frais`
+  ADD CONSTRAINT `fk_id_visiteur` FOREIGN KEY (`id_visiteur`) REFERENCES `utilisateur` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
